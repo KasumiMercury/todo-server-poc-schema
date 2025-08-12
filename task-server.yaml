@@ -297,15 +297,6 @@ paths:
                 code: 401
                 message: 'Unauthorized'
                 details: 'User ID not found in token'
-        '404':
-          description: Task not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-              example:
-                code: 404
-                message: 'Task not found'
         '500':
           description: Internal server error
           content:
