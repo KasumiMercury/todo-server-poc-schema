@@ -381,6 +381,7 @@ components:
         details:
           type: object
           description: Additional component details
+          additionalProperties: true
           example: 
             connection: 'PostgreSQL'
             responseTime: '5ms'
