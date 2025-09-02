@@ -49,7 +49,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResponse'
               example:
                 code: 500
                 message: 'Internal Server Error'
@@ -75,9 +75,9 @@ paths:
                 existingTasks:
                   summary: Existing tasks
                   value:
-                    - id: '12345'
+                    - id: 'd85d6f2b-87ad-11f0-abaf-72e91ad152a0'
                       title: 'Sample Task 1'
-                    - id: '67890'
+                    - id: '68f8fade-87ee-11f0-9e3a-edcdb15c45d3'
                       title: 'Sample Task 2'
                 emptyTasks:
                   summary: No tasks available
@@ -88,7 +88,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResponse'
               example:
                 code: 401
                 message: 'Unauthorized'
@@ -98,7 +98,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResponse'
               example:
                 code: 500
                 message: 'Internal server error'
@@ -128,7 +128,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResponse'
               example:
                 code: 400
                 message: 'Bad request'
@@ -138,7 +138,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResponse'
               example:
                 code: 401
                 message: 'Unauthorized'
@@ -148,7 +148,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResponse'
               example:
                 code: 500
                 message: 'Internal server error'
@@ -168,6 +168,7 @@ paths:
           description: The ID of the task to retrieve
           schema:
             type: string
+            format: uuid
       responses:
         '200':
           description: A task object
@@ -180,7 +181,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResponse'
               example:
                 code: 401
                 message: 'Unauthorized'
@@ -190,7 +191,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResponse'
               example:
                 code: 404
                 message: 'Task not found'
@@ -199,7 +200,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResponse'
               example:
                 code: 500
                 message: 'Internal server error'
@@ -218,6 +219,7 @@ paths:
           description: The ID of the task to update
           schema:
             type: string
+            format: uuid
       requestBody:
         required: true
         content:
@@ -236,7 +238,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResponse'
               example:
                 code: 400
                 message: 'Bad request'
@@ -246,7 +248,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResponse'
               example:
                 code: 401
                 message: 'Unauthorized'
@@ -256,7 +258,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResponse'
               example:
                 code: 404
                 message: 'Task not found'
@@ -265,7 +267,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResponse'
               example:
                 code: 500
                 message: 'Internal server error'
@@ -284,6 +286,7 @@ paths:
           description: The ID of the task to delete
           schema:
             type: string
+            format: uuid
       responses:
         '204':
           description: Task deleted successfully
@@ -292,7 +295,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResponse'
               example:
                 code: 401
                 message: 'Unauthorized'
@@ -302,7 +305,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResponse'
               example:
                 code: 500
                 message: 'Internal server error'
@@ -319,8 +322,9 @@ components:
       properties:
         id:
           type: string
+          format: uuid
           description: The unique identifier for the task
-          example: '12345'
+          example: 'd85d6f2b-87ad-11f0-abaf-72e91ad152a0'
         title:
           type: string
           maxLength: 255
@@ -381,12 +385,13 @@ components:
         details:
           type: object
           description: Additional component details
+          additionalProperties: true
           example: 
             connection: 'PostgreSQL'
             responseTime: '5ms'
       required:
         - status
-    error:
+    errorResponse:
       type: object
       properties:
         code:
