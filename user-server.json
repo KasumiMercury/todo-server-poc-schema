@@ -3,7 +3,7 @@
   "info": {
     "title": "ToDoUser API",
     "description": "TodoアプリバックエンドのUserと認証に関するAPI",
-    "version": "v0.0.1"
+    "version": "v0.0.2"
   },
   "servers": [
     {
@@ -394,30 +394,50 @@
         "description": "ユーザーの詳細な情報\nログインしているユーザー自身の情報"
       },
       "ProblemDetail": {
+        "required": [
+          "type",
+          "title",
+          "status",
+          "detail",
+          "instance"
+        ],
         "type": "object",
         "properties": {
           "type": {
-            "type": "string",
-            "format": "uri"
+            "type": "string"
           },
           "title": {
             "type": "string"
           },
           "status": {
-            "type": "integer",
-            "format": "int32"
+            "type": "integer"
           },
           "detail": {
             "type": "string"
           },
           "instance": {
-            "type": "string",
-            "format": "uri"
+            "type": "string"
           },
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "object"
+          "errors": {
+            "type": "array",
+            "items": {
+              "required": [
+                "field"
+              ],
+              "type": "object",
+              "properties": {
+                "field": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "rejectedValue": {
+                  "type": "string",
+                  "nullable": true
+                }
+              }
             }
           }
         }
@@ -470,13 +490,31 @@
             "type": "string"
           }
         }
+      },
+      "ValidationErrorDetail": {
+        "required": [
+          "field"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "rejectedValue": {
+            "type": "string",
+            "nullable": true
+          }
+        }
       }
     },
     "securitySchemes": {
       "jwt": {
         "type": "http",
         "description": "JWTを利用したトークン",
-        "in": "header",
         "scheme": "bearer",
         "bearerFormat": "JWT"
       }
